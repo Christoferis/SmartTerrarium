@@ -1,43 +1,53 @@
-#include "DHTesp.h" // Click here to get the library: http://librarymanager/All#DHTesp
+#include <Arduino.h>
+#include <ESP8266WebServer.h>
+#include <ESP8266WiFiAP.h>
 
-#ifdef ESP32
-#pragma message(THIS EXAMPLE IS FOR ESP8266 ONLY!)
-#error Select ESP8266 board.
-#endif
+IPAddress ip(192, 168, 4, 1);
+IPAddress subnet(255, 255, 255, 0);
 
-DHTesp dht;
+ESP8266WiFiAPClass wifi;
 
+ESP8266WebServer server(80);
+
+String webpage = "<!DOCTYPE html>"
+"<html>"
+"<head>"
+"<title>Hello, World!</title>"
+"</head>"
+"<body>"
+"<h1>Hello, World!</h1>"
+"</body>"
+"</html>";
+
+// prototypes
+void handleRoot();
+
+// Testing Webserver
 void setup()
 {
   Serial.begin(115200);
-  Serial.println();
-  Serial.println("Status\tHumidity (%)\tTemperature (C)\t(F)\tHeatIndex (C)\t(F)");
-  String thisBoard= ARDUINO_BOARD;
-  Serial.println(thisBoard);
 
-  // Autodetect is not working reliable, don't use the following line
-  // dht.setup(17);
-  // use this instead: 
-  dht.setup(1, DHTesp::DHT11); // Connect DHT sensor to GPIO 17
+  Serial.println("Starting Server...");
+  // setup Webserver
+  // TODO: add captive portal
+
+  wifi.softAPConfig(ip, ip, subnet);
+  wifi.softAP("SmartTerrarium", NULL);
+
+  // register root
+  server.on("/", handleRoot);
+  
+  digitalWrite(LED_BUILTIN, HIGH);
+  server.begin();
+}
+
+void handleRoot()
+{
+  server.send(200, "text/html", webpage);
+  Serial.println(server.args());
 }
 
 void loop()
 {
-  delay(dht.getMinimumSamplingPeriod());
-
-  float humidity = dht.getHumidity();
-  float temperature = dht.getTemperature();
-
-  Serial.print(dht.getStatusString());
-  Serial.print("\t");
-  Serial.print(humidity, 1);
-  Serial.print("\t\t");
-  Serial.print(temperature, 1);
-  Serial.print("\t\t");
-  Serial.print(dht.toFahrenheit(temperature), 1);
-  Serial.print("\t\t");
-  Serial.print(dht.computeHeatIndex(temperature, humidity, false), 1);
-  Serial.print("\t\t");
-  Serial.println(dht.computeHeatIndex(dht.toFahrenheit(temperature), humidity, true), 1);
-  delay(2000);
+  server.handleClient();
 }
