@@ -7,7 +7,6 @@
 #include "modules/light.h"
 #include "modules/terrarium.h"
 #include "modules/time.h"
-#include "modules/html.h"
 
 
 IPAddress ip(192, 168, 4, 1);
