@@ -14,7 +14,7 @@ void light_setup()
 
 void light_loop()
 {
-    bool prevButton = false;
+    int prevButton = false;
 
     // loop does multiple things: check button state, set state of light
     // light
@@ -31,18 +31,15 @@ void light_loop()
     {
         prevButton = false;    
     }
-    
 }
 
-
-
 // get, set, toggle
-void set_light(bool s)
+void set_light(int s)
 {
     state = s;
 }
 
-bool get_light()
+int get_light()
 {
     return state;
 }
