@@ -23,6 +23,8 @@ void time_setup()
     - modulo not deterministic, function may be called in irregular intervals
     - millis() overflows every 50 days
     - daytime should be in minutes, for convenience, and rollover every
+    - implement auto light in such a way that it can still be overriden with the button
+        -> behaviour if light is on and auto light says on -> light stays on
 */
 void time_loop()
 {

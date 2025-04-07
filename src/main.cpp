@@ -3,6 +3,13 @@
 #include <ESP8266WebServer.h>
 #include <ESP8266WiFiAP.h>
 
+// modules
+#include "modules/light.h"
+#include "modules/terrarium.h"
+#include "modules/time.h"
+#include "modules/html.h"
+
+
 IPAddress ip(192, 168, 4, 1);
 IPAddress subnet(255, 255, 255, 0);
 
@@ -20,7 +27,6 @@ void setup()
 {
   Serial.begin(115200);
 
-  Serial.println("Starting Server...");
   // setup Webserver
   // TODO: add captive portal
 
@@ -31,7 +37,11 @@ void setup()
   server.on("/", handleRoot);
   server.on("/test", handleTest);
   
-  digitalWrite(LED_BUILTIN, HIGH);
+  //setup modules
+  terrarium_setup();
+  light_setup();
+  time_setup();
+
   server.begin();
 }
 
@@ -50,4 +60,6 @@ void handleTest()
 void loop()
 {
   server.handleClient();
+  light_loop();
+  time_loop();
 }
