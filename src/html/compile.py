@@ -1,0 +1,1 @@
+# minifies and compiles the html to a header file compatible with the project
