@@ -14,6 +14,8 @@ IPAddress subnet(255, 255, 255, 0);
 
 ESP8266WiFiAPClass wifi;
 
+ESP8266WebServer server(80);
+
 String webpage =
 "<!DOCTYPE html><html><head><title>Simple Test Site</title><script>function sendData() {var xhr = new XMLHttpRequest();xhr.open('POST', 'http://192.168.4.1/test', true);xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');xhr.onload = function() {if (xhr.status >= 200 && xhr.status < 400) {console.log('Data sent successfully!');} else {console.error('Request failed!');}};xhr.onerror = function() {console.error('Connection error!');};xhr.send('value=1');}</script></head><body><button onclick='sendData()'>Send</button></body></html>";
 

@@ -13,21 +13,6 @@ extern ESP8266WebServer server;
 
 #define min_day 0x5a0
 
-// attributes
-
-//start with overflow
-
-//daytime in ms
-unsigned long daytime = 0;
-unsigned long morningtime;
-unsigned long eveningtime;
-
-// synchronization with phone time
-unsigned long offset = 0;
-
-
-int timeswitch = 0;
-
 // converts current time keeping to a real time of day in minutes
 String toString();
 

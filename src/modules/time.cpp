@@ -10,6 +10,14 @@
 unsigned long oldtime = 0;
 unsigned long internal = 0;
 
+unsigned long daytime = 0;
+unsigned long morningtime;
+unsigned long eveningtime;
+
+unsigned long offset = 0;
+int timeswitch = 0;
+
+
 // Arduino functions
 void time_setup()
 {
@@ -80,6 +88,10 @@ void handleTimechange()
 {
     // offer html
 
+}
 
-
+// returns daytime as a time in 24h format
+String toString()
+{
+    return "";
 }

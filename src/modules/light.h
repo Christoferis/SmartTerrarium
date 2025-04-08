@@ -10,8 +10,6 @@
 #define LIGHT_PIN 2
 #define BUTTON_PIN 3
 
-// attributes
-static int state = false;
 
 // functions
 void light_setup(void);

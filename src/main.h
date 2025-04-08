@@ -10,6 +10,6 @@
 #define false 0
 
 // attributes
-ESP8266WebServer server(80);
+extern ESP8266WebServer server;
 
 

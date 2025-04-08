@@ -4,6 +4,8 @@
 // macros 
 #define correspondance(state) (state == true ? HIGH : LOW)
 
+static int state = false;
+int prevButton = false;
 
 // Arduino functions
 void light_setup()
@@ -14,7 +16,6 @@ void light_setup()
 
 void light_loop()
 {
-    int prevButton = false;
 
     // loop does multiple things: check button state, set state of light
     // light
@@ -27,7 +28,7 @@ void light_loop()
         toggle_light();
         prevButton = true;
     }
-    else
+    else if (digitalRead(BUTTON_PIN) == LOW)
     {
         prevButton = false;    
     }
