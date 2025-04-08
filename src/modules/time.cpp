@@ -4,10 +4,11 @@
 #include <Arduino.h>
 #include <EEPROM.h>
 #include <limits.h>
+#include <stdlib.h>
 
-unsigned long minute = 0;
-unsigned long oldmod = ULONG_MAX;
-unsigned long overflow = 0;
+// attributes
+unsigned long oldtime = 0;
+unsigned long internal = 0;
 
 // Arduino functions
 void time_setup()
@@ -15,7 +16,6 @@ void time_setup()
     server.on("/sync", handleSync);
     server.on("/time", handleTimechange);
 }
-
 
 // TODO: Rewrite
 /*
@@ -26,29 +26,31 @@ void time_setup()
     - implement auto light in such a way that it can still be overriden with the button
         -> behaviour if light is on and auto light says on -> light stays on
 */
+// https://arduino.stackexchange.com/questions/12587/how-can-i-handle-the-millis-rollover
+// I really forgot how modular calculations work huh
+
 void time_loop()
 {
-    // millis is not run / incremented every millissecond -> workaround
-    // also some more math to circumvent millis() overflowing every 50 days
+    // timekeeping
+    unsigned long time = millis();
 
-    unsigned long currenttime = millis();
+    //assumed that time jump < than a day
+    internal = ((time - oldtime) + internal) % ms_day;
 
-    unsigned long modulo = (currenttime - minute) % ms_minute;
+    // sync internal time to external time with offset
+    daytime = internal + offset;
 
-    // regular case: modulo turns && no overflow
-    if (modulo < oldmod && minute < currenttime ) 
+    oldtime = time;
+
+    //Action timing second
+    if (daytime <= morningtime + ms_seconds && daytime >= morningtime - ms_seconds)
     {
-        daytime = (daytime + 1) % min_day;
-        minute = currenttime;
-        overflow = 0;
-    }
-    // odd case: overflow of millis
-    if (minute > currenttime)
+        morning();
+        
+    } else if (daytime <= eveningtime + ms_seconds && daytime >= eveningtime - ms_seconds)
     {
-        // calc distance to overflow and add to currenttime
+        evening();
     }
-
-    oldmod = modulo;
 }
 
 // time sensitive functions
@@ -62,3 +64,22 @@ void evening()
     set_light(true);
 }
 
+void handleSync()
+{
+    // offset calc: compare internal time and external time -> offset so that internal = external time
+    String thing = server.arg("time");
+    char* array = (char*) calloc(sizeof(char), thing.length() + 1);
+
+    thing.toCharArray(array, thing.length() + 1);
+    offset = strtoul(array, NULL, 0) - internal;
+
+    free(array);
+}
+
+void handleTimechange()
+{
+    // offer html
+
+
+
+}
