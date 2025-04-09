@@ -1,10 +1,12 @@
 #pragma once
-#include <WString.h>
+#include <Arduino.h>
 
-// various stuff for html templates
+/*
+    Basic HTML Templating Engine: replace certain parts in HTML Docs with custom Data!
+    To create a placeholder: <ph>placeholder</ph>
+*/
 
-//replacement statements must be enclosed using this symbol
-#define BRACKETS "%%"
+#define maxRules 10
 
 typedef String (* htmlReplace)(void);
 
@@ -20,10 +22,10 @@ struct htmlRule
 class htmlTemplate
 {
 private:
-    static const int limit = 100;
-
-    htmlRule rules[limit];
+    htmlRule rules[maxRules];
     int counter = 0;
+
+    htmlRule searchRules(String identifier);
 
 public:
 
