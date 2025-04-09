@@ -10,6 +10,7 @@
 unsigned long oldtime = 0;
 unsigned long internal = 0;
 
+// preset times
 unsigned long daytime = 0;
 unsigned long morningtime;
 unsigned long eveningtime;
@@ -17,6 +18,8 @@ unsigned long eveningtime;
 unsigned long offset = 0;
 int timeswitch = 0;
 
+// used to disable this feature entirely 
+int enabled = 0;
 
 // Arduino functions
 void time_setup()
@@ -51,11 +54,11 @@ void time_loop()
     oldtime = time;
 
     //Action timing second
-    if (daytime <= morningtime + ms_seconds && daytime >= morningtime - ms_seconds)
+    if (daytime <= morningtime + ms_seconds && daytime >= morningtime - ms_seconds && enabled)
     {
         morning();
         
-    } else if (daytime <= eveningtime + ms_seconds && daytime >= eveningtime - ms_seconds)
+    } else if (daytime <= eveningtime + ms_seconds && daytime >= eveningtime - ms_seconds && enabled)
     {
         evening();
     }
@@ -87,11 +90,11 @@ void handleSync()
 void handleTimechange()
 {
     // offer html
-
 }
 
-// returns daytime as a time in 24h format
-String toString()
+
+// toString and toggle method
+void toggle()
 {
-    return "";
+    enabled = !enabled;
 }

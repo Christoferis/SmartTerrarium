@@ -13,8 +13,15 @@ extern ESP8266WebServer server;
 
 #define min_day 0x5a0
 
-// converts current time keeping to a real time of day in minutes
-String toString();
+// utility functions
+
+// returns String representation of time (ms -> 24 hour format)
+String toStringMorning();
+String toStringEvening();
+String toStringDay();
+
+// toggles this module
+void toggle();
 
 // arduino functions
 void time_setup(void);
