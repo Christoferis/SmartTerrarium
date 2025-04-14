@@ -7,7 +7,7 @@
 */
 
 // defines
-#define DHT_PIN 3
+#define DHT_PIN D3
 
 // Arduino Functions
 void terrarium_setup();
