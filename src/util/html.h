@@ -22,14 +22,19 @@ struct htmlRule
 class htmlTemplate
 {
 private:
+    String page;
     htmlRule rules[maxRules];
     int counter = 0;
 
     htmlRule searchRules(String identifier);
+    String format(String html);
 
 public:
+    htmlTemplate(String page);
 
-    String format(String html);
     void addRule(htmlRule rule);
+    String serve();
 };
+
+
 

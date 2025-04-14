@@ -2,6 +2,13 @@
 
 
 // class implementation
+htmlTemplate::htmlTemplate(String page)
+{
+    // Constructor
+    this->page = page;
+}
+
+// this method directly changes the String, copy must be provided as input
 String htmlTemplate::format(String html)
 {
     //search handles <ph> search2 handles </ph>
@@ -13,7 +20,7 @@ String htmlTemplate::format(String html)
     // assumption: there always exists a closing tag
     while (search != -1 && search2 != -1)
     {        
-        // create substring, search rules and replace
+        // create substring, search rules and rarduino eplace
         String tag = html.substring(search + 4, search2);
 
         // search rule if none, skip
@@ -31,7 +38,6 @@ String htmlTemplate::format(String html)
         search2 = html.indexOf("</ph>", search);
     }
 
-    //not really needed, as String is Object and Object is manipulated directly (no new instances) 
     return html;
 }
 
@@ -42,4 +48,9 @@ void htmlTemplate::addRule(htmlRule rule)
     }
 
     counter++;
+}
+
+String htmlTemplate::serve()
+{
+    return this->format(page.substring(0));
 }
