@@ -26,41 +26,48 @@ void handleTest();
 // Testing Webserver
 void setup()
 {
-  Serial.begin(115200);
-
+  
   // setup Webserver
   // TODO: add captive portal
-
-  wifi.softAPConfig(ip, ip, subnet);
-  wifi.softAP("SmartTerrarium", NULL);
-
-  // register root
-  server.on("/", handleRoot);
-  server.on("/test", handleTest);
+  
+  // wifi.softAPConfig(ip, ip, subnet);
+  // wifi.softAP("SmartTerrarium", NULL);
+  
+  // // register root
+  // server.on("/", handleRoot);
+  // server.on("/test", handleTest);
   
   //setup modules
   terrarium_setup();
   light_setup();
-  time_setup();
-
+  // time_setup();
+  
+  Serial.begin(115200);
   server.begin();
 }
 
 void handleRoot()
 {
-  server.send(200, "text/html", webpage);
-  // Serial.println(server.arg("value"));
+  // server.send(200, "text/html", webpage);
+  // // Serial.println(server.arg("value"));
 }
 
 void handleTest()
 {
-  Serial.println(server.arg("value"));
-  server.send(200);
+  // Serial.println(server.arg("value"));
+  // server.send(200);
 }
 
 void loop()
 {
-  server.handleClient();
-  light_loop();
-  time_loop();
+  // server.handleClient();
+  light_loop(); 
+  // time_loop();
+
+  Serial.println("Temp:");
+  Serial.println(getTemperature());
+  Serial.println("Hum:");
+  Serial.println(getTemperature());
+
+  delay(2000);
 }

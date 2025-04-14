@@ -7,8 +7,8 @@
     via a button that this module keeps track off
 */
 
-#define LIGHT_PIN 2
-#define BUTTON_PIN 3
+#define LIGHT_PIN D2
+#define BUTTON_PIN D1
 
 
 // functions
@@ -18,4 +18,3 @@ void light_loop(void);
 void toggle_light();
 void set_light(int);
 int get_light();
-

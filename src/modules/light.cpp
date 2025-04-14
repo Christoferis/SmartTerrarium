@@ -27,11 +27,16 @@ void light_loop()
     {
         toggle_light();
         prevButton = true;
+
+        //minuscule delay to prevent to prevent chattering
+        delay(10);
     }
     else if (digitalRead(BUTTON_PIN) == LOW)
     {
         prevButton = false;    
     }
+
+
 }
 
 // get, set, toggle
