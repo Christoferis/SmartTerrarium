@@ -10,6 +10,8 @@ extern ESP8266WebServer server;
 // various values as millis or minutes
 #define ms_day 0x5265c00L
 #define ms_seconds 0x3e8L
+#define ms_minute 0xea60
+#define ms_hour 0x36ee80L
 
 #define min_day 0x5a0
 

@@ -52,9 +52,12 @@ void webpages_setup()
 
 void webpages_root()
 {
+    server.send(200, "text/html", root.serve());
+}
 
-
-
+void webpages_settings()
+{
+    server.send(200, "text/html", settings.serve());
 }
 
 void webpages_error()
