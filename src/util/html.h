@@ -31,6 +31,7 @@ private:
 
 public:
     htmlTemplate(String page);
+    htmlTemplate();
 
     void addRule(htmlRule rule);
     String serve();

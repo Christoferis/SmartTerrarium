@@ -8,6 +8,11 @@ htmlTemplate::htmlTemplate(String page)
     this->page = page;
 }
 
+htmlTemplate::htmlTemplate()
+{
+    // Constructor
+}
+
 // this method directly changes the String, copy must be provided as input
 String htmlTemplate::format(String html)
 {
