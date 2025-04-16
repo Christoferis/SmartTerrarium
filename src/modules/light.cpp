@@ -45,9 +45,9 @@ void set_light(int s)
     state = s;
 }
 
-int get_light()
+String get_light()
 {
-    return state;
+    return state == 0 ? "Off" : "On";
 }
 
 void toggle_light()

@@ -17,4 +17,4 @@ void light_loop(void);
 
 void toggle_light();
 void set_light(int);
-int get_light();
+String get_light();

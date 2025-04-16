@@ -33,5 +33,4 @@ void evening();
 
 // to be used with the webserver module
 void handleSync();
-void handleTimechange();
 

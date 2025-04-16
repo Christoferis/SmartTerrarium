@@ -1,6 +1,7 @@
 #include "terrarium.h"
 
 #include <DHTesp.h>
+#include <Arduino.h>
 
 DHTesp sensor;
 
@@ -11,12 +12,12 @@ void terrarium_setup()
 }
 
 //TODO: See what this library has to offer more
-float getHumidity()
+String get_Humidity()
 {
-    return sensor.getHumidity();
+    return String(sensor.getHumidity());
 }
 
-float getTemperature()
+String get_Temperature()
 {
-    return sensor.getTemperature();
+    return String(sensor.getTemperature());
 }

@@ -13,5 +13,5 @@
 void terrarium_setup();
 
 // wrappers
-float getHumidity();
-float getTemperature();
+String get_Humidity();
+String get_Temperature();

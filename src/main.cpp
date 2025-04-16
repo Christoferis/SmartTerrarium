@@ -40,7 +40,6 @@ void setup()
 
   test.addRule((htmlRule){.identifier = "bibinos", .function = g});
 
-  test.serve();
 
   //setup modules
   terrarium_setup();
@@ -52,24 +51,12 @@ void setup()
   server.begin();
 }
 
-void handleRoot()
-{
-  // server.send(200, "text/html", webpage);
-  // // Serial.println(server.arg("value"));
-}
-
-void handleTest()
-{
-  // Serial.println(server.arg("value"));
-  // server.send(200);
-}
-
 void loop()
 {
 
-  Serial.println(page;
+  Serial.println(page);
   Serial.println("---");
-  Serial.println(test.serve());)
+  Serial.println(test.serve());
 
   delay(2000);
 }

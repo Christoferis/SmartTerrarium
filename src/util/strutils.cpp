@@ -1,5 +1,6 @@
 #include "strutils.h"
 #include <math.h>
+#include <float.h>
 
 // code lifted from: https://github.com/Christoferis/PraktikumMechatronik/blob/main/src/pm_bot/strutil.c
 
@@ -59,6 +60,30 @@ String inttostr(int num)
 
     return out;
 }
+
+
+// right now: support for up to 4 digits before and 9 digits after decimal (more research needed)
+String floattostr(float num)
+{
+    String eger = inttostr((int) num);
+    num = num - ((int) num);
+
+    String out = "";
+    out.reserve(eger.length() + 10);
+    out.concat()
+
+    // send rest of the number to inttostr and only process back part
+
+    // cleanup zeroes
+
+}
+
+float strtofloat(String string)
+{
+
+
+}
+
 
 int isnumeric(char c)
 {

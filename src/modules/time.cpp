@@ -25,7 +25,6 @@ int enabled = 0;
 void time_setup()
 {
     server.on("/sync", handleSync);
-    server.on("/time", handleTimechange);
 }
 
 // TODO: Rewrite
@@ -87,14 +86,14 @@ void handleSync()
     free(array);
 }
 
-void handleTimechange()
-{
-    // offer html
-}
-
-
 // toString and toggle method
 void toggle()
 {
     enabled = !enabled;
+}
+
+String toStringDay()
+{
+    
+
 }
