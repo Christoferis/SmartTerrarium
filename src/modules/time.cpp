@@ -15,6 +15,9 @@ unsigned long daytime = 0;
 unsigned long morningtime;
 unsigned long eveningtime;
 
+unsigned long morningtime_offset = 0;
+unsigned long eveningtime_offset = 0;
+
 unsigned long offset = 0;
 int timeswitch = 0;
 
@@ -53,14 +56,19 @@ void time_loop()
     oldtime = time;
 
     //Action timing second
-    if (daytime <= morningtime + ms_seconds && daytime >= morningtime - ms_seconds && enabled)
+    if (morningtime_offset > daytime - morningtime)
     {
         morning();
-        
-    } else if (daytime <= eveningtime + ms_seconds && daytime >= eveningtime - ms_seconds && enabled)
+    }
+
+    if (eveningtime_offset > daytime - eveningtime)
     {
         evening();
     }
+
+
+    morningtime_offset = daytime - morningtime;
+    eveningtime_offset = daytime - eveningtime;
 }
 
 // time sensitive functions
