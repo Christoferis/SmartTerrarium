@@ -10,7 +10,6 @@
 #include "light.h"
 #include "time.h"
 #include "util/html.h"
-#include "util/strutils.h"
 
 // declarations
 htmlTemplate root;

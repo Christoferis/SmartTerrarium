@@ -107,7 +107,7 @@ String toStringDay()
 
     // might not convert correctly
     int hours = daytime / ms_hour;
-    int minutes = daytime / ms_minute % 60;
+    int minutes = daytime % (ms_minute * 60);
 
     out.concat(hours);
     out.concat(":");
@@ -115,3 +115,36 @@ String toStringDay()
 
     return out;
 }
+
+String toStringMorning()
+{
+    // daytime already only goes 24h. make use of that
+    String out = "";
+
+    // might not convert correctly
+    int hours = morningtime / ms_hour;
+    int minutes = morningtime % (ms_minute * 60);
+
+    out.concat(hours);
+    out.concat(":");
+    out.concat(minutes);
+
+    return out;
+}
+
+String toStringEvening()
+{
+    // daytime already only goes 24h. make use of that
+    String out = "";
+
+    // might not convert correctly
+    int hours = eveningtime / ms_hour;
+    int minutes = eveningtime % (ms_minute * 60);
+
+    out.concat(hours);
+    out.concat(":");
+    out.concat(minutes);
+
+    return out;
+}
+
