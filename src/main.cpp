@@ -42,9 +42,9 @@ void setup()
 
 
   //setup modules
-  terrarium_setup();
-  light_setup();
-  // time_setup();
+  // terrarium_setup();
+  // light_setup();
+  time_setup();
 
 
   Serial.begin(115200);

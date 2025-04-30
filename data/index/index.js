@@ -3,13 +3,14 @@
 // it sends a sync task to host when pressing on sync button
 // it sends a sync task and redirects to timeset.html when pressing the set time button
 
+//TODO: synchronize on connect
 
 function sync(change)
 {
     var date = Date.now() % 86400000
 
     var xhr = new XMLHttpRequest();
-    xhr.open('POST', 'http://192.168.4.1/sync', true);
+    xhr.open('POST', 'http://192.168.4.1/timeset', true);
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     xhr.send('sync=' + date.toString);
 

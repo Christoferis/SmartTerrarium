@@ -12,8 +12,8 @@ unsigned long internal = 0;
 
 // preset times
 unsigned long daytime = 0;
-unsigned long morningtime;
-unsigned long eveningtime;
+unsigned long morningtime = 0;
+unsigned long eveningtime = 0;
 
 unsigned long morningtime_offset = 0;
 unsigned long eveningtime_offset = 0;
@@ -27,7 +27,7 @@ int enabled = 0;
 // Arduino functions
 void time_setup()
 {
-    server.on("/sync", handleSync);
+    server.on("/timeset", handleSync);
 }
 
 // TODO: Rewrite
@@ -66,7 +66,6 @@ void time_loop()
         evening();
     }
 
-
     morningtime_offset = daytime - morningtime;
     eveningtime_offset = daytime - eveningtime;
 }
@@ -84,14 +83,40 @@ void evening()
 
 void handleSync()
 {
-    // offset calc: compare internal time and external time -> offset so that internal = external time
-    String thing = server.arg("time");
-    char* array = (char*) calloc(sizeof(char), thing.length() + 1);
 
-    thing.toCharArray(array, thing.length() + 1);
+    //handle sync and optional evening and morning part
+
+    // offset calc: compare internal time and external time -> offset so that internal = external time
+    String sync = server.arg("sync");
+    char* array = (char*) calloc(sizeof(char), sync.length() + 1);
+
+    sync.toCharArray(array, sync.length() + 1);
     offset = strtoul(array, NULL, 0) - internal;
 
     free(array);
+    
+    // if evening and morning arguments are available, read them and stuff
+    String morning = server.arg("morning");
+    if (!morning.isEmpty()) 
+    {
+        char* array = (char*) calloc(sizeof(char), morning.length() + 1);
+
+        morning.toCharArray(array, morning.length() + 1);
+        offset = strtoul(array, NULL, 0) - internal;
+
+        free(array);
+    }
+
+    String evening = server.arg("evening");
+    if (!evening.isEmpty()) 
+    {
+        char* array = (char*) calloc(sizeof(char), evening.length() + 1);
+
+        evening.toCharArray(array, evening.length() + 1);
+        offset = strtoul(array, NULL, 0) - internal;
+
+        free(array);
+    }
 }
 
 // toString and toggle method

@@ -15,10 +15,20 @@ function setTime()
 
     // 86400000ms = 1day
 
+    //in ms
+    morning = document.getElementById("morninghours").value * 3600000 + document.getElementById("morningminutes").value * 60000
+    evening = document.getElementById("eveninghours").value * 3600000 + document.getElementById("eveningminutes").value * 60000
+
+    console.log(morning);
+
+    date = Date.now();
+
     var xhr = new XMLHttpRequest();
-    xhr.open('POST', 'http://192.168.4.1/sync', true);
+    xhr.open('POST', 'http://192.168.4.1/timeset', true);
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    xhr.send('sync=' + date.toString);
+    xhr.send('sync=' + date.toString());
+    xhr.send('morning=' + morning.toString());
+    xhr.send('evening=' + evening.toString());
 
     
     if (!change && xhr.status == 200) {
