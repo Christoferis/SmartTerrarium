@@ -44,7 +44,7 @@ void setup()
   //setup modules
   // terrarium_setup();
   // light_setup();
-  time_setup();
+  // time_setup();
 
 
   Serial.begin(115200);
@@ -54,9 +54,25 @@ void setup()
 void loop()
 {
 
-  Serial.println(page);
-  Serial.println("---");
-  Serial.println(test.serve());
+  // test stuff
+  // 14:00
+  Serial.println(toStringTime(50400000));
+
+  // 14:30
+  Serial.println(toStringTime(52200000));
+  
+  // 00:00
+  Serial.println(toStringTime(0));
+
+  // 16:43
+  Serial.println(toStringTime(60180000));
+  
+  //23:59
+  Serial.println(toStringTime(86340000));
+
+  // Serial.println(page);
+  // Serial.println("---");
+  // Serial.println(test.serve());
 
   delay(2000);
 }

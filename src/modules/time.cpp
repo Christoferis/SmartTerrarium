@@ -30,18 +30,6 @@ void time_setup()
     server.on("/timeset", handleSync);
 }
 
-// TODO: Rewrite
-/*
-    Things to consider:
-    - modulo not deterministic, function may be called in irregular intervals
-    - millis() overflows every 50 days
-    - daytime should be in minutes, for convenience, and rollover every
-    - implement auto light in such a way that it can still be overriden with the button
-        -> behaviour if light is on and auto light says on -> light stays on
-*/
-// https://arduino.stackexchange.com/questions/12587/how-can-i-handle-the-millis-rollover
-// I really forgot how modular calculations work huh
-
 void time_loop()
 {
     // timekeeping
@@ -125,51 +113,40 @@ void toggle()
     enabled = !enabled;
 }
 
-String toStringDay()
+String toStringTime(long ms)
 {
     // daytime already only goes 24h. make use of that
     String out = "";
 
     // might not convert correctly
-    int hours = daytime / ms_hour;
-    int minutes = daytime % (ms_minute * 60);
+    int hours = ms / ms_hour;
+    int minutes = (ms % ms_hour) / ms_minute;
 
     out.concat(hours);
     out.concat(":");
+
+    if (minutes < 10) {
+        out.concat("0");        
+    }
+
     out.concat(minutes);
 
     return out;
+}
+
+String toStringDay()
+{
+    return toStringTime(daytime);
+}
+
+
+String toStringEvening()
+{
+    return toStringTime(eveningtime);
 }
 
 String toStringMorning()
 {
-    // daytime already only goes 24h. make use of that
-    String out = "";
-
-    // might not convert correctly
-    int hours = morningtime / ms_hour;
-    int minutes = morningtime % (ms_minute * 60);
-
-    out.concat(hours);
-    out.concat(":");
-    out.concat(minutes);
-
-    return out;
-}
-
-String toStringEvening()
-{
-    // daytime already only goes 24h. make use of that
-    String out = "";
-
-    // might not convert correctly
-    int hours = eveningtime / ms_hour;
-    int minutes = eveningtime % (ms_minute * 60);
-
-    out.concat(hours);
-    out.concat(":");
-    out.concat(minutes);
-
-    return out;
+    return toStringTime(morningtime);
 }
 

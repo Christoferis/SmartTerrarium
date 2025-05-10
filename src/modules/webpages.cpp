@@ -44,6 +44,9 @@ void webpages_setup()
     root.addRule((htmlRule){.identifier = "light", .function = get_light});
     root.addRule((htmlRule){.identifier = "terrariumtime", .function = toStringDay});
 
+    // rule adding: settings
+
+
     // server registering
     server.on("/", webpages_root);
     server.on("/time", webpages_settings);

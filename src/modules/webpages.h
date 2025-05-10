@@ -10,3 +10,4 @@ void webpages_setup();
 // webpages
 void webpages_root();
 void webpages_settings();
+void webpages_test();
