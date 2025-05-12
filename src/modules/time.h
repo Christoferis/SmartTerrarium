@@ -21,7 +21,6 @@ extern ESP8266WebServer server;
 String toStringMorning();
 String toStringEvening();
 String toStringDay();
-String toStringTime(long ms);
 
 // toggles this module
 void toggle();

@@ -1,5 +1,6 @@
 #include "time.h"
 #include "light.h"
+#include "util/minimath.h"
 
 #include <Arduino.h>
 #include <EEPROM.h>
@@ -8,21 +9,21 @@
 
 // attributes
 unsigned long oldtime = 0;
-unsigned long internal = 0;
 
 // preset times
 unsigned long daytime = 0;
-unsigned long morningtime = 0;
-unsigned long eveningtime = 0;
+unsigned long morningtime = 60000;
+unsigned long eveningtime = 90000;
 
 unsigned long morningtime_offset = 0;
 unsigned long eveningtime_offset = 0;
 
-unsigned long offset = 0;
-int timeswitch = 0;
 
 // used to disable this feature entirely 
 int enabled = 0;
+
+// prototype
+String toStringTime(long ms);
 
 // Arduino functions
 void time_setup()
@@ -32,18 +33,16 @@ void time_setup()
 
 void time_loop()
 {
-    // timekeeping
+    // new version
     unsigned long time = millis();
-
-    //assumed that time jump < than a day
-    internal = ((time - oldtime) + internal) % ms_day;
-
-    // sync internal time to external time with offset
-    daytime = internal + offset;
-
+    daytime = ((time - oldtime) + daytime) % ms_day;
     oldtime = time;
 
     //Action timing second
+    // idea: center the flip not on midnight but on the time of activation itself
+    // aka 0 is at the time when morning activates -> from this point there exists a pre and after time
+    // also obeyed by underflow
+
     if (morningtime_offset > daytime - morningtime)
     {
         morning();
@@ -61,49 +60,36 @@ void time_loop()
 // time sensitive functions
 void morning()
 {
-    set_light(false);
+    Serial.println("morning");
+    // set_light(false);
 }
 
 void evening()
 {
-    set_light(true);
+    Serial.println("evening");
+    // set_light(true);
 }
 
 void handleSync()
 {
-
     //handle sync and optional evening and morning part
 
-    // offset calc: compare internal time and external time -> offset so that internal = external time
+    // new thing: just set to sync time (no arithmatic since this here is the equivalent of a quartz clock)
+
     String sync = server.arg("sync");
-    char* array = (char*) calloc(sizeof(char), sync.length() + 1);
+    daytime = stringtoul(sync);
 
-    sync.toCharArray(array, sync.length() + 1);
-    offset = strtoul(array, NULL, 0) - internal;
-
-    free(array);
-    
     // if evening and morning arguments are available, read them and stuff
     String morning = server.arg("morning");
     if (!morning.isEmpty()) 
     {
-        char* array = (char*) calloc(sizeof(char), morning.length() + 1);
-
-        morning.toCharArray(array, morning.length() + 1);
-        offset = strtoul(array, NULL, 0) - internal;
-
-        free(array);
+        morningtime = stringtoul(morning);
     }
 
     String evening = server.arg("evening");
     if (!evening.isEmpty()) 
     {
-        char* array = (char*) calloc(sizeof(char), evening.length() + 1);
-
-        evening.toCharArray(array, evening.length() + 1);
-        offset = strtoul(array, NULL, 0) - internal;
-
-        free(array);
+        eveningtime = stringtoul(evening);
     }
 }
 

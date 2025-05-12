@@ -25,7 +25,7 @@ String page;
 // prototypes
 void handleRoot();
 void handleTest();
-String g();
+void g();
 
 // Testing Webserver
 void setup()
@@ -36,15 +36,17 @@ void setup()
   File f = SPIFFS.open("/test.html", "r");
   page = f.readString();
 
+  wifi.softAPConfig(ip, ip, subnet);
+  wifi.softAP("SmartTerrarium", NULL);
+
   test = htmlTemplate(page);
 
-  test.addRule((htmlRule){.identifier = "bibinos", .function = g});
-
+  server.on("/", g);
 
   //setup modules
   // terrarium_setup();
   // light_setup();
-  // time_setup();
+  time_setup();
 
 
   Serial.begin(115200);
@@ -53,31 +55,16 @@ void setup()
 
 void loop()
 {
+  server.handleClient();
 
-  // test stuff
-  // 14:00
-  Serial.println(toStringTime(50400000));
-
-  // 14:30
-  Serial.println(toStringTime(52200000));
-  
-  // 00:00
-  Serial.println(toStringTime(0));
-
-  // 16:43
-  Serial.println(toStringTime(60180000));
-  
-  //23:59
-  Serial.println(toStringTime(86340000));
+  time_loop();
 
   // Serial.println(page);
   // Serial.println("---");
   // Serial.println(test.serve());
-
-  delay(2000);
 }
 
-String g()
+void g()
 {
-  return "Hello World";
+  server.send(200, "text/html", page);
 }
