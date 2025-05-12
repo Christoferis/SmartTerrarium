@@ -12,8 +12,8 @@ unsigned long oldtime = 0;
 
 // preset times
 unsigned long daytime = 0;
-unsigned long morningtime = 60000;
-unsigned long eveningtime = 90000;
+unsigned long morningtime = 0;
+unsigned long eveningtime = 0;
 
 unsigned long morningtime_offset = 0;
 unsigned long eveningtime_offset = 0;
@@ -76,6 +76,8 @@ void handleSync()
 
     // new thing: just set to sync time (no arithmatic since this here is the equivalent of a quartz clock)
 
+    
+
     String sync = server.arg("sync");
     daytime = stringtoul(sync);
 
@@ -91,6 +93,8 @@ void handleSync()
     {
         eveningtime = stringtoul(evening);
     }
+
+    server.send(200);
 }
 
 // toString and toggle method

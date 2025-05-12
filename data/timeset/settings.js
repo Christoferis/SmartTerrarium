@@ -21,16 +21,16 @@ function setTime()
 
     console.log(morning);
 
-    date = Date.now();
+    var date = new Date();
+    var ms = (date.getTime() - date.getTimezoneOffset() * 60000) % 86400000;
 
     var xhr = new XMLHttpRequest();
     xhr.open('POST', 'http://192.168.4.1/timeset', true);
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    xhr.send('sync=' + date.toString());
+    xhr.send('sync=' + ms.toString());
     xhr.send('morning=' + morning.toString());
     xhr.send('evening=' + evening.toString());
 
-    
     if (!change && xhr.status == 200) {
         
         window.alert("Time synchronized successfully");

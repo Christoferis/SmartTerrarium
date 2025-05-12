@@ -7,12 +7,13 @@
 
 function sync(change)
 {
-    var date = Date.now() % 86400000
+    var date = new Date();
+    var ms = (date.getTime() - date.getTimezoneOffset() * 60000) % 86400000;
 
     var xhr = new XMLHttpRequest();
     xhr.open('POST', 'http://192.168.4.1/timeset', true);
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    xhr.send('sync=' + date.toString);
+    xhr.send('sync=' + ms.toString());
 
     
     if (!change && xhr.status == 200) {

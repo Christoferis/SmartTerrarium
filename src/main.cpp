@@ -61,7 +61,9 @@ void loop()
 
   // Serial.println(page);
   // Serial.println("---");
-  // Serial.println(test.serve());
+  Serial.println(toStringDay());
+
+  delay(500);
 }
 
 void g()
