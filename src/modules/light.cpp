@@ -4,7 +4,7 @@
 // macros 
 #define correspondance(state) (state == true ? HIGH : LOW)
 
-static int state = true;
+static int state = false;
 int prevButton = false;
 
 // Arduino functions

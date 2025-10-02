@@ -12,8 +12,8 @@ unsigned long oldtime = 0;
 
 // preset times
 unsigned long daytime = 0;
-unsigned long morningtime = 0x35c9880;
-unsigned long eveningtime = 0x35804a0;
+unsigned long morningtime = 0;
+unsigned long eveningtime = 0;
 
 unsigned long morningtime_offset = 0;
 unsigned long eveningtime_offset = 0;
@@ -67,8 +67,8 @@ void morning()
 
 void evening()
 {
-    // Serial.println("evening");
-    // set_light(true);
+    Serial.println("evening");
+    set_light(true);
 }
 
 void handleSync()

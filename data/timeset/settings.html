@@ -37,7 +37,6 @@
             xhr.send('sync=' + ms.toString() + "&" + 'morning=' + morning.toString() + "&" + 'evening=' + evening.toString());
 
             if (xhr.status == 200) {
-
                 window.alert("Time synchronized successfully");
             } else {
                 window.alert("Error synchronizing time");
@@ -53,14 +52,14 @@
     <h2>Turn on Time</h2>
     <i>Currently it is set at <ph>morningtime</ph></i> <br>
     After when should the lights turn on? <br>
-    <input id="morninghours" type="number" min="0" max="23" value="0"> :
-    <input id="morningminutes" type="number" min="0" max="59" value="0">
+    <input id="eveninghours" type="number" min="0" max="23" value="0"> :
+    <input id="eveningminutes" type="number" min="0" max="59" value="0">
 
     <h2>Turn off Time</h2>
     After when should the lights turn off? <br>
     <i>Currently it is set at <ph>eveningtime</ph></i> <br>
-    <input id="eveninghours" type="number" min="0" max="23" value="0"> :
-    <input id="eveningminutes" type="number" min="0" max="59" value="0">
+    <input id="morninghours" type="number" min="0" max="23" value="0"> :
+    <input id="morningminutes" type="number" min="0" max="59" value="0">
     <br>
     <button onclick="setTime()">Set Times</button>
     <button onclick="toDashboard()">Return to Dashboard</button>
