@@ -24,6 +24,7 @@ void webpages_setup()
 
     if (!SPIFFS.begin())
     {
+        Serial.println("SPIFFS Error");
         server.on("/", webpages_error);
         return;
     }
@@ -49,6 +50,8 @@ void webpages_setup()
     // server registering
     server.on("/", webpages_root);
     server.on("/time", webpages_settings);
+
+    Serial.println("Finished Webpages Module Setup");
 }
 
 void webpages_root()

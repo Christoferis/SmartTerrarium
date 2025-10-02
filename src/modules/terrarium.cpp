@@ -9,6 +9,7 @@ DHTesp sensor;
 void terrarium_setup()
 {
     sensor.setup(DHT_PIN, DHTesp::DHT11);
+    Serial.println("Finished Terrarium Module Setup");
 }
 
 //TODO: See what this library has to offer more

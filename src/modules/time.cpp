@@ -28,6 +28,7 @@ String toStringTime(long ms);
 void time_setup()
 {
     server.on("/timeset", handleSync);
+    Serial.println("Finished Time Module Setup");
 }
 
 void time_loop()

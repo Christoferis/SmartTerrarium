@@ -12,6 +12,8 @@ void light_setup()
 {
     pinMode(LIGHT_PIN, OUTPUT);
     pinMode(BUTTON_PIN, INPUT);
+
+    Serial.println("Finished Terrarium Module Setup");
 }
 
 void light_loop()

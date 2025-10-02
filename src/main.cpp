@@ -31,15 +31,11 @@ void g();
 // Testing Webserver
 void setup()
 {
+  Serial.begin(115200);
   
-  SPIFFS.begin();
-
+  // SPIFFS.begin();
   wifi.softAPConfig(ip, ip, subnet);
   wifi.softAP("SmartTerrarium", NULL);
-
-  test = htmlTemplate(page);
-
-  server.on("/", g);
 
   //setup modules
   webpages_setup();
@@ -47,8 +43,6 @@ void setup()
   light_setup();
   time_setup();
 
-
-  Serial.begin(115200);
   server.begin();
 }
 
