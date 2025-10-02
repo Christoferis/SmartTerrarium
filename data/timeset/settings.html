@@ -36,7 +36,7 @@
             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
             xhr.send('sync=' + ms.toString() + "&" + 'morning=' + morning.toString() + "&" + 'evening=' + evening.toString());
 
-            if (!change && xhr.status == 200) {
+            if (xhr.status == 200) {
 
                 window.alert("Time synchronized successfully");
             } else if (!change) {
