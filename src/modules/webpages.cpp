@@ -45,7 +45,8 @@ void webpages_setup()
     root.addRule((htmlRule){.identifier = "terrariumtime", .function = toStringDay});
 
     // rule adding: settings
-
+    settings.addRule((htmlRule){.identifier = "eveningtime", .function = toStringEvening});
+    settings.addRule((htmlRule){.identifier = "morningtime", .function = toStringMorning});
 
     // server registering
     server.on("/", webpages_root);
