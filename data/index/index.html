@@ -22,14 +22,6 @@
             xhr.open('POST', 'http://192.168.4.1/timeset', true);
             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
             xhr.send('sync=' + ms.toString());
-
-
-            if (!change && xhr.status == 200) {
-
-                window.alert("Time synchronized successfully");
-            } else if (!change) {
-                window.alert("Error synchronizing time");
-            }
         }
 
         function timechange() {

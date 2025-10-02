@@ -35,12 +35,6 @@
             xhr.open('POST', 'http://192.168.4.1/timeset', true);
             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
             xhr.send('sync=' + ms.toString() + "&" + 'morning=' + morning.toString() + "&" + 'evening=' + evening.toString());
-
-            if (xhr.status == 200) {
-                window.alert("Time synchronized successfully");
-            } else {
-                window.alert("Error synchronizing time");
-            }
         }
     </script>
 </head>
@@ -50,14 +44,14 @@
     The Terrarium features lights that can automatically turn on and off at given times
 
     <h2>Turn on Time</h2>
-    <i>Currently it is set at <ph>morningtime</ph></i> <br>
+    <i>Currently it is set at <ph>eveningtime</ph></i> <br>
     After when should the lights turn on? <br>
     <input id="eveninghours" type="number" min="0" max="23" value="0"> :
     <input id="eveningminutes" type="number" min="0" max="59" value="0">
 
     <h2>Turn off Time</h2>
     After when should the lights turn off? <br>
-    <i>Currently it is set at <ph>eveningtime</ph></i> <br>
+    <i>Currently it is set at <ph>morningtime</ph></i> <br>
     <input id="morninghours" type="number" min="0" max="23" value="0"> :
     <input id="morningminutes" type="number" min="0" max="59" value="0">
     <br>
