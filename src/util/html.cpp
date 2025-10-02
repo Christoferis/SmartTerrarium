@@ -23,7 +23,7 @@ String htmlTemplate::format(String html)
     int search2 = html.indexOf("</ph>", 0);
     
     // assumption: there always exists a closing tag
-    while (search != -1 && search2 != -1)
+    while (search != -1 && search2 != -1 && counter > 0)
     {        
         // create substring, search rules and rarduino eplace
         String tag = html.substring(search + 4, search2);
