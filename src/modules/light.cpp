@@ -4,7 +4,7 @@
 // macros 
 #define correspondance(state) (state == true ? HIGH : LOW)
 
-static int state = false;
+static int state = true;
 int prevButton = false;
 
 // Arduino functions
@@ -32,6 +32,8 @@ void light_loop()
 
         //minuscule delay to prevent to prevent chattering
         delay(10);
+
+        Serial.println("Pressed");
     }
     else if (digitalRead(BUTTON_PIN) == LOW)
     {

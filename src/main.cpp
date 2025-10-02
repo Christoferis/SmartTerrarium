@@ -51,6 +51,8 @@ void loop()
   server.handleClient();
 
   time_loop();
+  light_loop();
+  
 
   // Serial.println(page);
   // Serial.println("---");
