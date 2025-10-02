@@ -8,7 +8,7 @@
 function sync(change)
 {
     var date = new Date();
-    var ms = (date.getTime() - date.getTimezoneOffset() * 60000) % 86400000;
+    var ms = (date.getTime() - dat.getTimezoneOffset() * 60000) % 86400000;
 
     var xhr = new XMLHttpRequest();
     xhr.open('POST', 'http://192.168.4.1/timeset', true);

@@ -11,6 +11,7 @@
 #include "modules/light.h"
 #include "modules/terrarium.h"
 #include "modules/time.h"
+#include "modules/webpages.h"
 
 IPAddress ip(192, 168, 4, 1);
 IPAddress subnet(255, 255, 255, 0);
@@ -33,9 +34,6 @@ void setup()
   
   SPIFFS.begin();
 
-  File f = SPIFFS.open("/test.html", "r");
-  page = f.readString();
-
   wifi.softAPConfig(ip, ip, subnet);
   wifi.softAP("SmartTerrarium", NULL);
 
@@ -44,8 +42,9 @@ void setup()
   server.on("/", g);
 
   //setup modules
-  // terrarium_setup();
-  // light_setup();
+  webpages_setup();
+  terrarium_setup();
+  light_setup();
   time_setup();
 
 

@@ -12,12 +12,11 @@ unsigned long oldtime = 0;
 
 // preset times
 unsigned long daytime = 0;
-unsigned long morningtime = 0;
-unsigned long eveningtime = 0;
+unsigned long morningtime = 0x35c9880;
+unsigned long eveningtime = 0x35804a0;
 
 unsigned long morningtime_offset = 0;
 unsigned long eveningtime_offset = 0;
-
 
 // used to disable this feature entirely 
 int enabled = 0;
@@ -42,6 +41,7 @@ void time_loop()
     // idea: center the flip not on midnight but on the time of activation itself
     // aka 0 is at the time when morning activates -> from this point there exists a pre and after time
     // also obeyed by underflow
+    // remember: works because of unsigned integers
 
     if (morningtime_offset > daytime - morningtime)
     {
@@ -61,22 +61,19 @@ void time_loop()
 void morning()
 {
     Serial.println("morning");
-    // set_light(false);
+    set_light(false);
 }
 
 void evening()
 {
-    Serial.println("evening");
+    // Serial.println("evening");
     // set_light(true);
 }
 
 void handleSync()
 {
     //handle sync and optional evening and morning part
-
     // new thing: just set to sync time (no arithmatic since this here is the equivalent of a quartz clock)
-
-    
 
     String sync = server.arg("sync");
     daytime = stringtoul(sync);

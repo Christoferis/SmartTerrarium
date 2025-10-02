@@ -18,7 +18,6 @@ htmlTemplate settings;
 // extra pages
 void webpages_error();
 
-
 void webpages_setup()
 {
     // prepare error page (just in case)

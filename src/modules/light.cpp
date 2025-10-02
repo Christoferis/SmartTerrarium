@@ -36,7 +36,6 @@ void light_loop()
         prevButton = false;    
     }
 
-
 }
 
 // get, set, toggle
